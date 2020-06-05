@@ -29,8 +29,10 @@ Demonstrate your understanding of this week's concepts by answering the followin
 Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your team lead.
 
 1. What is the DOM?
+    The Direct Object Model 
 
 2. What is an event?
+    Any activity happening on a webpage, including: mouse clicks, double-clicks, cursor hovers, dragging items on a page, using a mouse wheel, etc.
 
 3. What is an event listener?
 
