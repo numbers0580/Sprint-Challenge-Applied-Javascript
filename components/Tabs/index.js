@@ -15,7 +15,7 @@ axios.get('https://lambda-times-backend.herokuapp.com/topics')
         let itemsArray = fetched.data.topics;
         //contains the following array: ["javascript","bootstrap","technology","jquery","node.js"]
         itemsArray.forEach(function(currentItem) {
-            document.querySelector('.topics').appendChild(divMaker(currentItem));
+            theTopics.appendChild(divMaker(currentItem));
         });
     })
     .catch(errorMsg => {

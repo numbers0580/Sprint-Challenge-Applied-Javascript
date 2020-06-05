@@ -19,6 +19,7 @@
 //
 // Use your function to create a card for each of the articles and add the card to the DOM.
 
+let mainCards = document.querySelector('.cards-container');
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
     .then(received => {
         /*
@@ -60,12 +61,28 @@ axios.get('https://lambda-times-backend.herokuapp.com/articles')
        let totalArticles = received.data.articles; // "javascript...", "bootstrap...", "technology...", "jquery...", "node..."
        //so: totalArticles.javascript[0 - 3] has "headline", "authorPhoto", "authorName" keys
        //The same is true for totalArticles.bootstrap, totalArticles.technology, totalArticles.jquery, totalArticles.node
+       totalArticles.javascript.forEach(function(js) {
+           //Each of these should now only contain one object with the keys of headline, authorPhoto, and authorName. Same for the following .forEach's
+           mainCards.appendChild(cardMaker(js));
+       });
+       totalArticles.bootstrap.forEach(function(bt) {
+           mainCards.appendChild(cardMaker(bt));
+        });
+       totalArticles.technology.forEach(function(tc) {
+           mainCards.appendChild(cardMaker(tc));
+        });
+       totalArticles.jquery.forEach(function(jq) {
+           mainCards.appendChild(cardMaker(jq));
+        });
+       totalArticles.node.forEach(function(nd) {
+           mainCards.appendChild(cardMaker(nd));
+        });
     })
     .catch(errorMsg => {
         console.log('Error getting data from articles URL');
     })
 
-    function cardMaker() {
+    function cardMaker(articleObj) {
         let topDiv = document.createElement('div');
         let headlineDiv = document.createElement('div');
         let authorsDiv = document.createElement('div');
@@ -78,9 +95,9 @@ axios.get('https://lambda-times-backend.herokuapp.com/articles')
         authorsDiv.classList.add('author');
         imageDiv.classList.add('img-container');
 
-        headlineDiv.textContent = '';
-        theImage.setAttribute('src', '#');
-        authorsName.textContent = '';
+        headlineDiv.textContent = articleObj.headline;
+        theImage.setAttribute('src', articleObj.authorPhoto);
+        authorsName.textContent = `By ${articleObj.authorName}`;
 
         imageDiv.appendChild(theImage);
         authorsDiv.appendChild(imageDiv);
