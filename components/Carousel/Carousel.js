@@ -17,3 +17,48 @@
     <div class="right-button"> > </div>
   </div>
 */
+
+let crsContainer = document.querySelector('.carousel-container');
+let imgIndex = 0;
+crsContainer.appendChild(carouselMaker());
+
+function carouselMaker() {
+  let mainCarousel = document.createElement('div');
+  let leftBtn = document.createElement('div');
+  let rightBtn = document.createElement('div');
+  let theImages = [];
+  for(let i = 0; i < 4; i++) {
+    theImages.push(document.createElement('img'));
+  }
+
+  mainCarousel.classList.add('carousel');
+  leftBtn.classList.add('left-button');
+  leftBtn.textContent = ' < ';
+  leftBtn.addEventListener('click', function(event) {
+    theImages[imgIndex].style.display = 'none';
+    imgIndex--;
+    if(imgIndex < 0) imgIndex = 3;
+    theImages[imgIndex].style.display = 'block';
+  });
+  rightBtn.classList.add('right-button');
+  rightBtn.textContent = ' > ';
+  rightBtn.addEventListener('click', function(event) {
+    theImages[imgIndex].style.display = 'none';
+    imgIndex++;
+    if(imgIndex > 3) imgIndex = 0;
+    theImages[imgIndex].style.display = 'block';
+  });
+  theImages[0].setAttribute('src', './assets/carousel/mountains.jpeg');
+  theImages[0].style.display = 'block';
+  theImages[1].setAttribute('src', './assets/carousel/computer.jpeg');
+  theImages[2].setAttribute('src', './assets/carousel/trees.jpeg');
+  theImages[3].setAttribute('src', './assets/carousel/turntable.jpeg');
+
+  mainCarousel.appendChild(leftBtn);
+  for(let j = 0; j < 4; j++) {
+    mainCarousel.appendChild(theImages[j]);
+  }
+  mainCarousel.appendChild(rightBtn);
+
+  return mainCarousel;
+}
